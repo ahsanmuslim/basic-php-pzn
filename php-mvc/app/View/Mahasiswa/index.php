@@ -1,10 +1,17 @@
+<?php
+
+use BasicPhpPzn\PhpMvc\Helper\Flasher;
+
+use const BasicPhpPzn\PhpMvc\Config\BASEURL;
+
+?>
 <div class="container mt-3">
 
-	<!-- <div class="row">
+	<div class="row">
 		<div class="col-lg-6">
-			Flasher::flash()
+			<?= Flasher::Flash() ?>
 		</div>		
-	</div> -->
+	</div>
 
 	<div class="row mb-3">
 		<div class="col-lg-6">
@@ -17,12 +24,9 @@
 
 	<div class="row">
 		<div class="col-lg-6">
-		<form action="mahasiswa/cari" method="post">
-		<div class="input-group mb-3">
-			<input type="text" class="form-control" placeholder="Cari mahasiswa" name="keyword" id="keyword">
-				<div class="input-group-append">
-					<button class="btn btn-primary" type="submit" id="tombolCari">Cari</button>
-				</div>
+		<form action="<?= BASEURL ?>/mahasiswa/cari" method="post">
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" placeholder="Cari mahasiswa" name="keyword" id="keyword">
 			</div>
 		</div>
 		</form>
@@ -31,15 +35,15 @@
 	<div class="row">
 		<div class="col-lg-6">
 			<h3>Daftar Mahasiswa</h3>
-			<ul class="list-group">
+			<ul class="list-group data-mahasiswa">
 				<?php foreach ($data['mhs'] as $mhs) :?>
 					<li class="list-group-item">
 						<?= $mhs['nama']; ?>						
-						<a href="mahasiswa/<?= $mhs['nim']; ?>" class="badge badge-primary float-right ml-1" >detail</a>
-						<a href="mahasiswa/<?= $mhs['nim']; ?>" class="badge badge-success float-right ml-1 tampilModalEdit" data-toggle="modal" data-target="#modalMhs" data-nim="<?= $mhs['nim']; ?>">edit</a>
-						<form action="mahasiswa/<?= $mhs['nim']; ?>" method="POST">
-							<input type="hidden" value="DELETE" name="_method" class="d-inline">
-							<input type="submit" value="delete" class="btn btn-danger btn-sm float-right" onClick="return confirm('Apakah Anda yakin akan menghapus data ini ?');" value="hapus" name="hapus">
+						<a href="mahasiswa/<?= $mhs['nim']; ?>" class="btn btn-primary btn-sm float-right ml-1" >detail</a>
+						<a href="mahasiswa/<?= $mhs['nim']; ?>" class="btn btn-success btn-sm float-right ml-1 tampilModalEdit" data-toggle="modal" data-target="#modalMhs" data-nim="<?= $mhs['nim']; ?>">edit</a>
+						<form action="mahasiswa/<?= $mhs['nim']; ?>" method="POST" class="d-inline">
+							<input type="hidden" value="DELETE" name="_method">
+							<input type="submit" value="delete" class="btn btn-danger btn-sm float-right ml-1" onClick="return confirm('Apakah Anda yakin akan menghapus data ini ?');" value="hapus" name="hapus">
 						</form>
 					</li>
 				<?php endforeach; ?>
@@ -60,7 +64,8 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="mahasiswa/tambah" method="post">
+				<form action="mahasiswa" method="post">
+				<input type="hidden" value="PUT" name="_method">
 				<div class="form-group">
 					<label for="nim">NIM</label>
 					<input type="text"  name="nim" class="form-control" id="nim">

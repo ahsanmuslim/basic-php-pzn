@@ -32,7 +32,7 @@ class Router
             }
         }
 
-        var_dump($method);
+        // var_dump($method);
 
         foreach (self::$routes as $route) {
             $pattern = "#^" . $route['path'] . "$#";

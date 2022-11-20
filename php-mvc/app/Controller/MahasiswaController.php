@@ -2,7 +2,9 @@
 
 namespace BasicPhpPzn\PhpMvc\Controller;
 
+
 use BasicPhpPzn\PhpMvc\App\Controller;
+use BasicPhpPzn\PhpMvc\Helper\Flasher;
 use const BasicPhpPzn\PhpMvc\Config\BASEURL;
 
 class MahasiswaController extends Controller
@@ -45,11 +47,11 @@ class MahasiswaController extends Controller
 	public function hapus ($nim) 
 	{
 		if( $this->model('Mahasiswa')->hapusDataMhs($nim) > 0 ){
-			// Flasher::setFlash('berhasil', 'dihapus', 'success');
+			Flasher::setFlash('berhasil', 'dihapus', 'success');
 			header ('Location: ' . BASEURL . '/mahasiswa' );
 			exit;
 		} else {
-			// Flasher::setFlash('gagal', 'dihapus', 'danger');
+			Flasher::setFlash('gagal', 'dihapus', 'danger');
 			header ('Location: ' . BASEURL . '/mahasiswa' );
 			exit;
 		}
@@ -76,10 +78,7 @@ class MahasiswaController extends Controller
 
 	public function cari ()
 	{
-		$data['title'] = 'Mahasiswa';
 		$data['mhs'] = $this->model('Mahasiswa')->cariDataMhs();	
-		$this->view('templates/header', $data); 
-		$this->view('mahasiswa/index', $data);
-		$this->view('templates/footer');
+		$this->view('Mahasiswa/livesearch', $data);
 	}
 }

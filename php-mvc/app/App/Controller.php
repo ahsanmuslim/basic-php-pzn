@@ -3,6 +3,7 @@
 namespace BasicPhpPzn\PhpMvc\App;
 
 require_once __DIR__ . '/../Config/config.php';
+require_once __DIR__ . '/../Helper/Flasher.php';
 
 class Controller 
 {
