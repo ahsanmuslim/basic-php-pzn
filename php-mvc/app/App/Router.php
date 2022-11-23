@@ -32,24 +32,31 @@ class Router
             }
         }
 
-        // var_dump($method);
+        //list Route
+        // var_dump(self::$routes);
 
+        //data list route di looping untuk memilih path & method yang cocok
         foreach (self::$routes as $route) {
             $pattern = "#^" . $route['path'] . "$#";
+
             if(preg_match($pattern, $path, $variable) && $method == $route['method']){
 
                 $function = $route['function'];
                 $controller = new $route['controller'];
+                // var_dump($controller);
                 //$controller->$function();
 
                 array_shift($variable);
                 call_user_func_array([$controller, $function], $variable);
-
+                
                 return;
             }
         }
+        
+        $className = 'BasicPhpPzn\PhpMvc\Controller\HomeController';
+        $controller = new $className;
+        $function = 'notfound';
+        call_user_func_array([$controller, $function], $variable);
 
-        http_response_code(404);
-        echo "Controller Not Found";
     }
 }

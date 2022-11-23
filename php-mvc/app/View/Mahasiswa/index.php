@@ -39,10 +39,11 @@ use const BasicPhpPzn\PhpMvc\Config\BASEURL;
 				<?php foreach ($data['mhs'] as $mhs) :?>
 					<li class="list-group-item">
 						<?= $mhs['nama']; ?>						
-						<a href="mahasiswa/<?= $mhs['nim']; ?>" class="btn btn-primary btn-sm float-right ml-1" >detail</a>
-						<a href="mahasiswa/<?= $mhs['nim']; ?>" class="btn btn-success btn-sm float-right ml-1 tampilModalEdit" data-toggle="modal" data-target="#modalMhs" data-nim="<?= $mhs['nim']; ?>">edit</a>
-						<form action="mahasiswa/<?= $mhs['nim']; ?>" method="POST" class="d-inline">
+						<a href="<?= BASEURL ?>/mahasiswa/<?= $mhs['nim']; ?>" class="btn btn-primary btn-sm float-right ml-1" >detail</a>
+						<a href="" class="btn btn-success btn-sm float-right ml-1 tampilModalEdit" data-toggle="modal" data-target="#modalMhs" data-nim="<?= $mhs['nim']; ?>">edit</a>
+						<form action="<?= BASEURL ?>/mahasiswa" method="POST" class="d-inline">
 							<input type="hidden" value="DELETE" name="_method">
+							<input type="hidden" value="<?= $mhs['nim']; ?>" name="nim">
 							<input type="submit" value="delete" class="btn btn-danger btn-sm float-right ml-1" onClick="return confirm('Apakah Anda yakin akan menghapus data ini ?');" value="hapus" name="hapus">
 						</form>
 					</li>
@@ -64,7 +65,7 @@ use const BasicPhpPzn\PhpMvc\Config\BASEURL;
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="mahasiswa" method="post">
+				<form action="<?= BASEURL ?>/mahasiswa" method="post">
 				<input type="hidden" value="PUT" name="_method">
 				<div class="form-group">
 					<label for="nim">NIM</label>

@@ -46,13 +46,13 @@ class Mahasiswa
 
 	}
 
-    public function hapusDataMhs ($nim)
+    public function hapusDataMhs ($data)
 	{
 		$query = " DELETE FROM mahasiswa WHERE nim =:nim ";
 
 		$this->db->query($query);
 
-		$this->db->bind('nim', $nim);
+		$this->db->bind('nim', $data['nim']);
 		$this->db->execute();
 
 		return $this->db->rowCount();

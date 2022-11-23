@@ -44,9 +44,9 @@ class MahasiswaController extends Controller
 	}
 
 
-	public function hapus ($nim) 
+	public function hapus () 
 	{
-		if( $this->model('Mahasiswa')->hapusDataMhs($nim) > 0 ){
+		if( $this->model('Mahasiswa')->hapusDataMhs($_POST) > 0 ){
 			Flasher::setFlash('berhasil', 'dihapus', 'success');
 			header ('Location: ' . BASEURL . '/mahasiswa' );
 			exit;
