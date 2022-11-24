@@ -7,8 +7,8 @@ use BasicPhpPzn\PhpMvc\Helper\Flasher;
 use const BasicPhpPzn\PhpMvc\Config\BASEURL;
 
 class LoginController extends Controller 
-{
-    public function index()
+{ 
+    public function index() : void
     {
         if (isset($_SESSION['useractive'])) {
             header('Location: ' . BASEURL . '/home');
@@ -18,7 +18,7 @@ class LoginController extends Controller
         }
     }
 
-    public function login()
+    public function login() : void
     {
         if($this->model('User')->cekUser($_POST) > 0){
             $_SESSION['useractive'] = $_POST['email'];
@@ -30,7 +30,7 @@ class LoginController extends Controller
         }
     }
 
-    public function logout()
+    public function logout() : void
     {
         session_destroy();
         header('Location: ' . BASEURL . '/');

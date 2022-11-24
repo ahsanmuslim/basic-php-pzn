@@ -2,7 +2,7 @@
 
 namespace BasicPhpPzn\PhpMvc\Config;
 
-const BASEURL = 'http://php-mvc-pzn.test:8080';
+const BASEURL = 'http://php-mvc-pzn.test';
 
 //konfigurasi define variable database 
 const DB_HOST = 'localhost';

@@ -1,6 +1,7 @@
 <?php
 
 use const BasicPhpPzn\PhpMvc\Config\BASEURL;
+use BasicPhpPzn\PhpMvc\Helper\Flasher;
 
 ?>
 <!DOCTYPE html>
@@ -12,6 +13,7 @@ use const BasicPhpPzn\PhpMvc\Config\BASEURL;
 	<title><?= $data['title'] ?></title>
 	<link rel="stylesheet" type="text/css" href="<?= BASEURL ?>/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="<?= BASEURL ?>/css/my-login.css">
+	<link rel="shortcut icon" href="<?= BASEURL ?>/img/icon.png" type="image/x-icon">
 </head>
 
 <body class="my-login-page">
@@ -22,6 +24,11 @@ use const BasicPhpPzn\PhpMvc\Config\BASEURL;
 					<div class="card fat border-primary mt-5">
 						<div class="card-body">
 							<h4 class="card-title">Login</h4>
+							<div class="row">
+								<div class="col-lg-12">
+									<?= Flasher::loginFailed() ?>
+								</div>		
+							</div>
 							<form action="<?= BASEURL ?>/login" method="POST" class="my-login-validation" novalidate="">
 								<div class="form-group">
 									<label for="email">Email</label>
@@ -65,6 +72,6 @@ use const BasicPhpPzn\PhpMvc\Config\BASEURL;
     <script src="<?= BASEURL ?>/js/jquery-3.3.1.js"></script>
     <script src="<?= BASEURL ?>/js/popper.js"></script>
     <script src="<?= BASEURL ?>/js/bootstrap.js"></script>
-    <script src="<?= BASEURL ?>js/my-login.js"></script>
+    <script src="<?= BASEURL ?>/js/my-login.js"></script>
 </body>
 </html>

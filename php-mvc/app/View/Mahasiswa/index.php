@@ -69,15 +69,15 @@ use const BasicPhpPzn\PhpMvc\Config\BASEURL;
 				<input type="hidden" value="PUT" name="_method">
 				<div class="form-group">
 					<label for="nim">NIM</label>
-					<input type="text"  name="nim" class="form-control" id="nim">
+					<input type="text"  name="nim" class="form-control" id="nim" required>
 				</div>
 				<div class="form-group">
 					<label for="nama">Nama Mahasiswa</label>
-					<input type="text" name="nama" class="form-control" id="nama">
+					<input type="text" name="nama" class="form-control" id="nama" required>
 				</div>
 				<div class="form-group">
 					<label for="jurusan">Jurusan</label>
-					<select name="jurusan" class="form-control" id="jurusan">
+					<select name="jurusan" class="form-control" id="jurusan" required>
 						<option value="Teknik Informatika">Teknik Informatika</option>
 						<option value="Teknik Mesin">Teknik Mesin</option>
 						<option value="Teknik Kimia">Teknik Kimia</option>
@@ -87,11 +87,11 @@ use const BasicPhpPzn\PhpMvc\Config\BASEURL;
 				</div>
 				<div class="form-group">
 					<label for="email">Email</label>
-					<input type="email" name="email" class="form-control" id="email" placeholder="contoh@gmail.com">
+					<input type="email" name="email" class="form-control" id="email" placeholder="contoh@gmail.com" required>
 				</div>
 				<div class="form-group">
 					<label for="alamat">Alamat</label>
-					<input type="text" name="alamat" class="form-control" id="alamat">
+					<input type="text" name="alamat" class="form-control" id="alamat" required>
 				</div>
 			</div>
 			<div class="modal-footer">

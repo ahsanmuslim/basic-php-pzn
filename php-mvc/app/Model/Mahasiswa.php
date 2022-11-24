@@ -1,6 +1,7 @@
 <?php
 
 use BasicPhpPzn\PhpMvc\App\Database;
+use phpDocumentor\Reflection\Types\Integer;
 
 class Mahasiswa
 {
@@ -26,14 +27,11 @@ class Mahasiswa
 	}
 
 
-	public function tambahDataMhs ($data)
+	public function tambahDataMhs ($data): int
 	{
-		$query = "INSERT INTO mahasiswa
-					VALUES 
-					(:nim, :nama, :jurusan, :email, :alamat)";
+		$query = "INSERT INTO mahasiswa	VALUES (:nim, :nama, :jurusan, :email, :alamat)";
 
 		$this->db->query($query);
-		
 		$this->db->bind('nim', $data['nim']);
 		$this->db->bind('nama', $data['nama']);
 		$this->db->bind('jurusan', $data['jurusan']);
@@ -41,17 +39,25 @@ class Mahasiswa
 		$this->db->bind('alamat', $data['alamat']);
 
 		$this->db->execute();
-
 		return $this->db->rowCount();
-
 	}
 
-    public function hapusDataMhs ($data)
+	//Fungsi untuk cek data mahasiswa berdasarkan nim 
+	public function cekMahasiswa($nim): int
+	{
+		$query = "SELECT nama FROM mahasiswa WHERE nim=:nim";
+
+		$this->db->query($query);
+		$this->db->bind('nim', $nim);
+		$this->db->execute();
+		return $this->db->rowCount();
+	}
+
+    public function hapusDataMhs ($data): int
 	{
 		$query = " DELETE FROM mahasiswa WHERE nim =:nim ";
 
 		$this->db->query($query);
-
 		$this->db->bind('nim', $data['nim']);
 		$this->db->execute();
 
@@ -59,7 +65,7 @@ class Mahasiswa
 	}
 
 
-	public function updateDataMhs ($data)
+	public function updateDataMhs ($data): int
 	{
 		$query = "UPDATE mahasiswa SET 
 					nama =:nama,
@@ -82,7 +88,7 @@ class Mahasiswa
 
 	}
 
-	public function cariDataMhs ()
+	public function cariDataMhs (): array
 	{
 		$keyword = $_POST['keyword'];
 		$query = "SELECT * FROM mahasiswa WHERE nama LIKE :keyword";

@@ -12,7 +12,7 @@ class User
         $this->db = new Database();
     }
 
-    public function getUser()
+    public function getUser(): array
     {
         if(isset($_SESSION['useractive'])){
             $email = $_SESSION['useractive'];
@@ -23,7 +23,7 @@ class User
         }
     }
 
-    public function cekUser()
+    public function cekUser(): int
     {
         $email = $_POST['email'];
         $password = SHA1($_POST['password']);

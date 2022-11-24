@@ -1,7 +1,6 @@
 <?php
-
-use BasicPhpPzn\PhpMvc\Helper\Access;
 use const BasicPhpPzn\PhpMvc\Config\BASEURL;
+use BasicPhpPzn\PhpMvc\Helper\Access;
 
 $akses = new Access();
 ?>
@@ -10,7 +9,6 @@ $akses = new Access();
 <head>
 	<title>Halaman <?= $data['title'] ?></title>
 	<link rel="stylesheet" type="text/css" href="<?= BASEURL ?>/css/bootstrap.css">
-	<link rel="shortcut icon" href="<?= BASEURL ?>/img/icon.png" type="image/x-icon">
 </head>
 <body>
 
@@ -54,3 +52,24 @@ $akses = new Access();
 			</div>
 		</div>
 	</nav>
+
+
+	<div class="d-flex align-items-center" style="min-height: 60vh;">
+		<div class="container mt-5">
+			<div class="error-box">
+				<div class="error-body text-center p-4">
+					<h3><strong>ACCESS BLOCKED</strong></h3>
+					<h5><small>You do not have the authority to access this page</small></h5><br>
+					<a href="<?= BASEURL ?>/home" class="btn btn-primary">Back to home</a> 
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script src="<?= BASEURL ?>/js/jquery-3.3.1.js"></script>
+
+<script src="<?= BASEURL ?>/js/bootstrap.js"></script>
+<script src="<?= BASEURL ?>/js/script.js"></script>
+
+</body>
+</html>

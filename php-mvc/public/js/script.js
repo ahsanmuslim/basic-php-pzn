@@ -1,5 +1,7 @@
 $(function() {
 
+    const url = 'http://php-mvc-pzn.test/';
+
 
     $('.tombolTambahMhs').on('click',function(){
 
@@ -7,6 +9,7 @@ $(function() {
         $('#judulModal').html('Tambah Data Mahasiswa');
         $('.modal-footer button[type=submit]').html('Tambah Data');
         $('.modal-body input[type=hidden]').attr('value', 'POST');
+        $('.modal-body input[name=nim]').attr('readonly', false);
 
         //baris ini berfungsi untuk menghilangkan data yang ada di modal karena fungsi ajax getUbah masih tersimpan
         $('#nim').val('');
@@ -21,11 +24,11 @@ $(function() {
 
     $('.tampilModalEdit').on('click',function(){
 
-        // console.log('Edit');
         $('#judulModal').html('Edit Data Mahasiswa');
         $('.modal-footer button[type=submit]').html('Edit Data');
         $('.modal-body input[type=hidden]').attr('value', 'PUT');
-        $('.modal-body form').attr('action','http://php-mvc-pzn.test:8080/mahasiswa');
+        $('.modal-body input[name=nim]').attr('readonly', true);
+        $('.modal-body form').attr('action,' + url + 'mahasiswa');
 
         const nim = $(this).data('nim');
         // console.log(nim);
@@ -34,7 +37,7 @@ $(function() {
         
         $.ajax({
 
-            url: 'http://php-mvc-pzn.test:8080/mahasiswa/getEdit',
+            url: url + 'mahasiswa/getEdit',
             data: {nim : nim},
             method: 'post',
             dataType: 'json',
@@ -60,7 +63,7 @@ $(function() {
 
         $.ajax({
 
-            url: 'http://php-mvc-pzn.test:8080/mahasiswa/cari',
+            url: url + 'mahasiswa/cari',
             data: {keyword: keyword},
             method: 'post',
             success: function(data) {

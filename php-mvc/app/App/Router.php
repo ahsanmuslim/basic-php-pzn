@@ -2,17 +2,25 @@
 
 namespace BasicPhpPzn\PhpMvc\App;
 
+use BasicPhpPzn\PhpMvc\Helper\UrlParser;
+use phpDocumentor\Reflection\DocBlock\Tags\Reference\Url;
+
 class Router 
 {
     private static array $routes = [];
 
-    public static function add(string $method, string $path, string $controller, string $function): void
+    public static function add(string $method, 
+                                string $path,  
+                                string $controller, 
+                                string $function,
+                                array $middleware = []): void
     {
         self::$routes[] = [
             'method' => $method,
             'path' => $path,
             'controller' => $controller,
-            'function' => $function
+            'function' => $function,
+            'middlewares' => $middleware
         ];
     }
 
@@ -23,9 +31,8 @@ class Router
             $path = $_SERVER['PATH_INFO'];
         }
 
-        $method = $_SERVER['REQUEST_METHOD'];
-
         //cek request method POST apakah DELETE atau PUT
+        $method = $_SERVER['REQUEST_METHOD'];
         if($method == 'POST'){
             if(isset($_POST['_method'])){
                 $method = $_POST['_method'];
@@ -40,6 +47,12 @@ class Router
             $pattern = "#^" . $route['path'] . "$#";
 
             if(preg_match($pattern, $path, $variable) && $method == $route['method']){
+
+                //panggil class Middleware
+                foreach ($route['middlewares'] as $middleware) {
+                    $objmiddleware = new $middleware;
+                    $objmiddleware->index();
+                }
 
                 $function = $route['function'];
                 $controller = new $route['controller'];
