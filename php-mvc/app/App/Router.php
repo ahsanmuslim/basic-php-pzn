@@ -2,9 +2,6 @@
 
 namespace BasicPhpPzn\PhpMvc\App;
 
-use BasicPhpPzn\PhpMvc\Helper\UrlParser;
-use phpDocumentor\Reflection\DocBlock\Tags\Reference\Url;
-
 class Router 
 {
     private static array $routes = [];

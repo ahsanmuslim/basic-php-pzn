@@ -1,6 +1,6 @@
 <?php
 
-use const BasicPhpPzn\PhpMvc\Config\BASEURL;
+use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
 ?>
 <div class="container ml-6">
 	<h2 class="mt-4">About Me</h2>

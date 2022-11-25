@@ -1,12 +1,11 @@
 <?php
 
 use BasicPhpPzn\PhpMvc\App\Router;
+use BasicPhpPzn\PhpMvc\Controller\AuthController;
 use BasicPhpPzn\PhpMvc\Controller\HomeController;
 use BasicPhpPzn\PhpMvc\Middleware\AuthMiddleware;
 use BasicPhpPzn\PhpMvc\Controller\AboutController;
-use BasicPhpPzn\PhpMvc\Controller\AuthController;
 use BasicPhpPzn\PhpMvc\Controller\LoginController;
-use BasicPhpPzn\PhpMvc\Middleware\AccessMiddleware;
 use BasicPhpPzn\PhpMvc\Controller\MahasiswaController;
 
 //Router untuk Home

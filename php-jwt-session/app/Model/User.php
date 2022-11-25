@@ -1,6 +1,6 @@
 <?php
 
-use BasicPhpPzn\PhpMvc\App\Database;
+use BasicPhpPzn\PhpJwtSession\App\Database;
 
 class User 
 {
@@ -23,16 +23,13 @@ class User
         }
     }
 
-    public function cekUser(): int
+    public function cekUser(string $email, string $password): int
     {
-        $email = $_POST['email'];
-        $password = SHA1($_POST['password']);
-
         $cekdata = "SELECT * FROM ".$this->table." WHERE email =:email AND password =:password ";
         $this->db->query($cekdata);
 
         $this->db->bind('email',$email);
-        $this->db->bind('password',$password);
+        var_dumP($this->db->bind('password',$password));
 
         $this->db->execute();
         return $this->db->rowCount();

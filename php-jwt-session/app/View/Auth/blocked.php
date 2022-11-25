@@ -1,6 +1,6 @@
 <?php
-use const BasicPhpPzn\PhpMvc\Config\BASEURL;
-use BasicPhpPzn\PhpMvc\Helper\Access;
+use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
+use BasicPhpPzn\PhpJwtSession\Helper\Access;
 
 $akses = new Access();
 ?>

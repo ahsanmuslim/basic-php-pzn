@@ -1,14 +1,14 @@
 <?php
 
-use BasicPhpPzn\PhpMvc\App\Router;
-use BasicPhpPzn\PhpMvc\Controller\HomeController;
-use BasicPhpPzn\PhpMvc\Middleware\AuthMiddleware;
-use BasicPhpPzn\PhpMvc\Controller\AboutController;
-use BasicPhpPzn\PhpMvc\Controller\AuthController;
-use BasicPhpPzn\PhpMvc\Controller\LoginController;
-use BasicPhpPzn\PhpMvc\Middleware\AccessMiddleware;
-use BasicPhpPzn\PhpMvc\Controller\MahasiswaController;
+use BasicPhpPzn\PhpJwtSession\App\Router;
+use BasicPhpPzn\PhpJwtSession\Controller\AuthController;
+use BasicPhpPzn\PhpJwtSession\Controller\HomeController;
+use BasicPhpPzn\PhpJwtSession\Middleware\AuthMiddleware;
+use BasicPhpPzn\PhpJwtSession\Controller\AboutController;
+use BasicPhpPzn\PhpJwtSession\Controller\LoginController;
+use BasicPhpPzn\PhpJwtSession\Controller\MahasiswaController;
 
+echo 'Hello';
 //Router untuk Home
 Router::add('GET', '/', LoginController::class, 'index');
 Router::add('GET', '/home', HomeController::class, 'index', [AuthMiddleware::class]);

@@ -1,8 +1,8 @@
 <?php
 
-use BasicPhpPzn\PhpMvc\Helper\Flasher;
+use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
 
-use const BasicPhpPzn\PhpMvc\Config\BASEURL;
+use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
 
 ?>
 <div class="container mt-3">

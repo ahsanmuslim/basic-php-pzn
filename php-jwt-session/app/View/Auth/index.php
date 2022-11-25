@@ -1,7 +1,7 @@
 <?php
 
-use const BasicPhpPzn\PhpMvc\Config\BASEURL;
-use BasicPhpPzn\PhpMvc\Helper\Flasher;
+use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
+use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
 
 ?>
 <!DOCTYPE html>

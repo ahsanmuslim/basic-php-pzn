@@ -4,6 +4,8 @@ namespace BasicPhpPzn\PhpJwtSession\Controller;
 
 use BasicPhpPzn\PhpJwtSession\App\Controller;
 use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
+use BasicPhpPzn\PhpJwtSession\Helper\Session;
+
 use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
 
 class LoginController extends Controller 
@@ -20,9 +22,11 @@ class LoginController extends Controller
 
     public function login() : void
     {
-        if($this->model('User')->cekUser($_POST) > 0){
-            
+        $email = $_POST['email'];
+        $password = sha1($_POST['password']);
 
+        $session = new Session();
+        if($session->jwtlogin($email, $password)){
             header('Location: ' . BASEURL . '/home');
         } else {
             Flasher::setFlash('Login Gagal !!', 'Username / password Anda salah', 'danger', '', '');

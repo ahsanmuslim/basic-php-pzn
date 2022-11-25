@@ -63,7 +63,7 @@ class Router
             }
         }
         
-        $className = 'BasicPhpPzn\PhpMvc\Controller\HomeController';
+        $className = 'BasicPhpPzn\PhpJwtSession\Controller\HomeController';
         $controller = new $className;
         $function = 'notfound';
         call_user_func_array([$controller, $function], $variable);
