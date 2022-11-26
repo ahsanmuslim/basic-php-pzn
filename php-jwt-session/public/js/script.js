@@ -1,7 +1,6 @@
 $(function() {
 
-    const url = 'http://php-jwt-session.test/';
-
+    const url = window.location.origin + '/';
 
     $('.tombolTambahMhs').on('click',function(){
 
