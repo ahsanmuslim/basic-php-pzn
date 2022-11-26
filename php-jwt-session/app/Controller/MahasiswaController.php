@@ -5,6 +5,7 @@ namespace BasicPhpPzn\PhpJwtSession\Controller;
 
 use BasicPhpPzn\PhpJwtSession\App\Controller;
 use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
+use BasicPhpPzn\PhpJwtSession\Helper\Session;
 use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
 
 class MahasiswaController extends Controller
@@ -21,7 +22,6 @@ class MahasiswaController extends Controller
         $data['title'] = "PHP MVC - Mahasiswa";
         $data['mhs'] = $this->model('Mahasiswa')->getMahasiswa();
 		$data['userlogin'] = $this->userlogin;
-
         $this->view('templates/header', $data);
         $this->view('Mahasiswa/index', $data);
         $this->view('templates/footer');

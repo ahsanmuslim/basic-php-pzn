@@ -20,7 +20,7 @@ class AuthMiddleware implements Middleware
             $akses = new Access();
             if (! $akses->UserAccessCheck() ) {
                 header('Location: ' . BASEURL . '/blocked');
-                exit;
+                exit();
             }
         }
     }

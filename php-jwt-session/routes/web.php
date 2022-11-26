@@ -8,19 +8,18 @@ use BasicPhpPzn\PhpJwtSession\Controller\AboutController;
 use BasicPhpPzn\PhpJwtSession\Controller\LoginController;
 use BasicPhpPzn\PhpJwtSession\Controller\MahasiswaController;
 
-echo 'Hello';
 //Router untuk Home
 Router::add('GET', '/', LoginController::class, 'index');
 Router::add('GET', '/home', HomeController::class, 'index', [AuthMiddleware::class]);
 
 //Route untuk Mahasiswa
 Router::add('GET', '/mahasiswa', MahasiswaController::class, 'index', [AuthMiddleware::class]);
-Router::add('POST', '/mahasiswa', MahasiswaController::class, 'tambah');
-Router::add('GET', '/mahasiswa/([0-9a-zA-z]*)', MahasiswaController::class, 'detail');
-Router::add('POST', '/mahasiswa/getEdit', MahasiswaController::class, 'getEdit');
-Router::add('POST', '/mahasiswa/cari', MahasiswaController::class, 'cari');
-Router::add('PUT', '/mahasiswa', MahasiswaController::class, 'update');
-Router::add('DELETE', '/mahasiswa', MahasiswaController::class, 'hapus');
+Router::add('POST', '/mahasiswa', MahasiswaController::class, 'tambah', [AuthMiddleware::class]);
+Router::add('GET', '/mahasiswa/([0-9a-zA-z]*)', MahasiswaController::class, 'detail', [AuthMiddleware::class]);
+Router::add('POST', '/mahasiswa/getEdit', MahasiswaController::class, 'getEdit', [AuthMiddleware::class]);
+Router::add('POST', '/mahasiswa/cari', MahasiswaController::class, 'cari', [AuthMiddleware::class]);
+Router::add('PUT', '/mahasiswa', MahasiswaController::class, 'update', [AuthMiddleware::class]);
+Router::add('DELETE', '/mahasiswa', MahasiswaController::class, 'hapus', [AuthMiddleware::class]);
 
 //Route untuk About
 Router::add('GET', '/about', AboutController::class, 'index', [AuthMiddleware::class]);

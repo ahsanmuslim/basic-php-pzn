@@ -1,6 +1,6 @@
 $(function() {
 
-    const url = 'http://php-mvc-pzn.test/';
+    const url = 'http://php-jwt-session.test/';
 
 
     $('.tombolTambahMhs').on('click',function(){

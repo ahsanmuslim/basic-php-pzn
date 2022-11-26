@@ -14,24 +14,43 @@ class User
 
     public function getUser(): array
     {
-        if(isset($_SESSION['useractive'])){
-            $email = $_SESSION['useractive'];
-            $query = "SELECT * FROM " .$this->table. " WHERE email =:email";
-            $this->db->query($query);
-            $this->db->bind('email', $email);
-            return $this->db->single();
-        }
+        $email = $_SESSION['email'];
+        $query = "SELECT * FROM " .$this->table. " WHERE email =:email";
+        $this->db->query($query);
+        $this->db->bind('email', $email);
+        return $this->db->single();
     }
 
-    public function cekUser(string $email, string $password): int
+    public function cekUserLogin(string $email, string $password): array
     {
         $cekdata = "SELECT * FROM ".$this->table." WHERE email =:email AND password =:password ";
         $this->db->query($cekdata);
 
         $this->db->bind('email',$email);
-        var_dumP($this->db->bind('password',$password));
+        $this->db->bind('password',$password);
 
         $this->db->execute();
-        return $this->db->rowCount();
+        return $this->db->single();
     }
+
+    public function simpanJWT(string $jwt, string $email): void
+    {
+        $query = "UPDATE user SET jwt =:jwt WHERE email =:email";
+        $this->db->query($query);
+
+        $this->db->bind("email", $email);
+        $this->db->bind("jwt", $jwt);
+        $this->db->execute();
+    }
+
+    public function hapusJWT(): void
+    {
+        $email = $_SESSION['email'];
+        $query = "UPDATE user SET jwt = NULL WHERE email =:email";
+        $this->db->query($query);
+
+        $this->db->bind("email", $email);
+        $this->db->execute();
+    }
+
 }

@@ -5,7 +5,7 @@ require_once __DIR__ . '/../Config/config.php';
 
 use PDO;
 use PDOException;
-use const BasicPhpPzn\PhpMvc\Config\{DB_HOST, DB_USER, DB_PASS, DB_NAME};
+use const BasicPhpPzn\PhpJwtSession\Config\{DB_HOST, DB_USER, DB_PASS, DB_NAME};
 
 
 class Database 

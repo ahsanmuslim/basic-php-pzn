@@ -2,6 +2,7 @@
 
 namespace BasicPhpPzn\PhpJwtSession\Controller;
 
+use Ramsey\Uuid\Uuid;
 use BasicPhpPzn\PhpJwtSession\App\Controller;
 
 class HomeController extends Controller
@@ -15,11 +16,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        $data = $this->model('User')->getUser();
         $data['userlogin'] = $this->userlogin;
         $data['title'] = "PHP MVC - Home";
         $data['content'] = "Sebaik - baik manusia adalah yang paling bermanfaat untuk manusia lainnya. Untuk itu jadilah layaknya sebuah pohon yang akarnya menghujam ke tanah, batangnya kuat menjulang ke langit & daunnya rindang meneduhkan serta berbuah yang bisa dinikmati untuk makhluq lainnya.";
-
         $this->view('templates/header', $data);
         $this->view('Home/index', $data);
         $this->view('templates/footer');

@@ -2,7 +2,8 @@
 
 namespace BasicPhpPzn\PhpJwtSession\Controller;
 
-use BasicPhpPzn\PhpMvc\App\Controller;
+use BasicPhpPzn\PhpJwtSession\App\Controller;
+use BasicPhpPzn\PhpJwtSession\Helper\Session;
 
 class AboutController extends Controller
 {

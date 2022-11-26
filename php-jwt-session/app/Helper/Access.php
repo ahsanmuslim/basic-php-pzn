@@ -16,12 +16,11 @@ class Access extends Controller
         array_shift($url);
         $controller = $url[0];
 
-        // Ambil data user dari Database
-        $userLogin = $this->model('User')->getUser();
-        $role = $userLogin['role'];
+        // Ambil data user dari Cookie
+        $datauser =  $this->model('User')->getUser();                                                     
         
         //cek akses user 
-        if ($this->model('Role')->countAccess($role, $controller) > 0 ) {
+        if ($this->model('Role')->countAccess($datauser['role'], $controller) > 0 ) {
             return true;
         } else {
             return false;

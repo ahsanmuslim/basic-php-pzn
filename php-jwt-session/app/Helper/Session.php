@@ -2,27 +2,45 @@
 
 namespace BasicPhpPzn\PhpJwtSession\Helper;
 
-use Firebase\JWT\JWT;
-use BasicPhpPzn\PhpJwtSession\App\Controller;
 use Exception;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use Ramsey\Uuid\Uuid;
+
+use BasicPhpPzn\PhpJwtSession\App\Controller;
+use BasicPhpPzn\PhpJwtSession\App\Database;
 
 class Session extends Controller
 {
-    private static string $SECRET_KEY = "jadnsgjkhasdjghsdksagkdsjgkgjdfhguoiewhjtirojijfaiodjfgidsj";
+    private static string $SECRET_KEY = "jadnsgjkhasdjghsdksaewrmvjdfliyopporuqbh";
 
     public function jwtlogin(string $email, string $password): bool
     {
-        if($this->model('User')->cekUser($email, $password) > 0){
+        $data = $this->model('User')->cekUserLogin($email, $password);
+        if(! empty($data)){
+            //Set email session
+            $_SESSION['email'] = $email;
 
             //setting payload JWT
             $payload = [
-                "email" => $email,
-                "role" => "admin"
+                "email" => $data['email'],
+                "role" => $data['role'],
+                "id_login" => Uuid::uuid1()->toString()
             ];
 
-            //generate JWT dan simpan JWT di Cookie
+            //generate JWT, set cookie option dan simpan JWT di Cookie
             $jwt = JWT::encode($payload, self::$SECRET_KEY, 'HS256');
-            setcookie("PHP-MVC-PZN", $jwt);
+            $option = [
+                "expires" => time()+3600, // cookie expire 1 jam
+                "httponly" => true,
+                "secure" => false,
+                "path" => "",
+                "domain" => ""
+            ];
+            setcookie("PHP-MVC-PZN", $jwt, $option);
+
+            //simpan JWT di DB User
+            $this->model('User')->simpanJWT($jwt, $email);
 
             return true;
         } else {
@@ -30,21 +48,26 @@ class Session extends Controller
         }
     }
 
-    public function getCurrentSession(): Session
+    public static function getCurrentSession(): bool
     {
-        if($_COOKIE['PHP-MVC-PZN']){
+
+        if(isset($_COOKIE['PHP-MVC-PZN']) && isset($_SESSION['email']) ){
+            $controller = new Controller();
+
+            $userlogin = $controller->model("User")->getUser();
             $jwt = $_COOKIE['PHP-MVC-PZN'];
 
-            //decode cookie yang berisi kode jwt yang dikirimkan browser untuk divalidasi apakah valid
-            try {         
-                $payload = JWT::decode($jwt, Session::$SECRET_KEY, ['HS256']);
-                return new Session(email: $payload['email'], role: $payload['role']);        
-            } catch (\Throwable $th) {   
-                $th->getMessage();
+            //cek apakah JWT user login pada Cookie sama dengan JWT active user yang tersimpan di DB
+            if(isset($userlogin['jwt'])){
+                if($jwt == $userlogin['jwt']){
+                    return true;
+                }
+            } else {
+                return false;
             }
-            
+
         } else {
-            throw new Exception("User belum login");
+            return false;
         }
     }
 }

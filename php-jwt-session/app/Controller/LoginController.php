@@ -12,7 +12,7 @@ class LoginController extends Controller
 { 
     public function index() : void
     {
-        if (isset($_SESSION['useractive'])) {
+        if(Session::getCurrentSession()){
             header('Location: ' . BASEURL . '/home');
         } else {
             $data['title'] = "PHP MVC - Login";
@@ -36,6 +36,9 @@ class LoginController extends Controller
 
     public function logout() : void
     {
+        //hapus JWT di DB, Hapus Cookie dan Hapus Session
+        $this->model("user")->hapusJWT();
+        setcookie("PHP-MVC-PZN", "", time() - 60);
         session_destroy();
         header('Location: ' . BASEURL . '/');
     }
