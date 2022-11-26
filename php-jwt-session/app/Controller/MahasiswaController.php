@@ -5,7 +5,6 @@ namespace BasicPhpPzn\PhpJwtSession\Controller;
 
 use BasicPhpPzn\PhpJwtSession\App\Controller;
 use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
-use BasicPhpPzn\PhpJwtSession\Helper\Session;
 use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
 
 class MahasiswaController extends Controller

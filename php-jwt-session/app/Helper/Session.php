@@ -8,7 +8,6 @@ use Firebase\JWT\Key;
 use Ramsey\Uuid\Uuid;
 
 use BasicPhpPzn\PhpJwtSession\App\Controller;
-use BasicPhpPzn\PhpJwtSession\App\Database;
 
 class Session extends Controller
 {
