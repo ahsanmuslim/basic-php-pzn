@@ -1,0 +1,19 @@
+{
+    "name": "ahmad/php-versi-8",
+    "description": "PHP Versi 8",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Ahmad\\PhpVersi8\\": "app"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ahmad Susanto",
+            "email": "ahmadsusanto912@gmail.com"
+        }
+    ],
+    "require": {
+        "php" : ">=8"
+    }
+}
