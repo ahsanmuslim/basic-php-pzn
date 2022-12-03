@@ -1,3 +1,8 @@
+<?php
+use BasicPhpPzn\PhpJwtSession\Services\Security;
+
+$csrftoken = Security::csrfToken();
+?>
 <!-- Begin Page Content -->
 <div class="container-fluid mt-4">
 
@@ -14,6 +19,7 @@
             <div class="card-body px-5">
                 <form action="<?= BASEURL; ?>/profile" method="post" enctype="multipart/form-data">
                 <input type="hidden" value="PUT" name="_method">
+                <input type="hidden" value="<?= $csrftoken ?>" name="csrftoken">
                     <div class="form-group">
                         <input type="hidden" name="id_user" value="<?= $data['userlogin']['id_user']; ?>" class="form-control" id="id_user">
                     </div>
@@ -27,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" value="<?= $data['userlogin']['email']; ?>" required onkeyup="checkEmail();" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
+                        <input type="email" name="email" id="email" class="form-control" value="<?= $data['userlogin']['email']; ?>" required onkeyup="checkEmail();" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" readonly>
                     </div>
                     <div class="form-group">
                         <label for="no_telp">No telepon</label>
@@ -44,8 +50,8 @@
                         </div>
                     </div>
                     <br>
-                    <div class="form-group text-center">
-                        <input type="submit" name="update" value="Update" class="btn btn-primary">
+                    <div class="form-group text-right">
+                        <input type="submit" name="update" value="Update Profile" class="btn btn-primary">
                     </div>
                 </form>
             </div>
@@ -60,7 +66,7 @@
 
 function checkNama()
 {
-    var regEmail = new RegExp("^<div a-zA-Z=''></div>");
+    var regEmail = new RegExp("[a-zA-Z]");
     var nama = document.getElementById('namauser');
 
     var good_color = "#D0F8FF";

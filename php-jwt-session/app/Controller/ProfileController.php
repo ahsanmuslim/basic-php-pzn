@@ -6,6 +6,7 @@ use BasicPhpPzn\PhpJwtSession\Helper\Image;
 use BasicPhpPzn\PhpJwtSession\App\Controller;
 use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
 use BasicPhpPzn\PhpJwtSession\Helper\MacAddress;
+use BasicPhpPzn\PhpJwtSession\Services\Security;
 
 
 class ProfileController extends Controller
@@ -43,40 +44,50 @@ class ProfileController extends Controller
         $upload_gambar = $_FILES['profile']['name'];
         // var_dump(gd_info());
 
-        if ($upload_gambar) {
+        $respon = Security::verifyToken($_POST);
+		if($respon['type']){
 
-            $ekstensi_std = array('png', 'jpg', 'jpeg', 'gif');
-            $nama_file = $upload_gambar;
-            $x = explode('.', $nama_file);
-            $ekstensi = strtolower(end($x));
-            $ukuran = $_FILES['profile']['size'];
-            $file_temp = $_FILES['profile']['tmp_name'];
+            if ($upload_gambar) {
 
-            if (in_array($ekstensi, $ekstensi_std) === true) {
-                if ($ukuran < 2000000) {
-                    Image::compress($file_temp, 'img/' . $nama_file , 100);
-                    self::simpanGambar($nama_file, $file_lama, $upload_gambar);
+                $ekstensi_std = array('png', 'jpg', 'jpeg', 'gif');
+                $nama_file = $upload_gambar;
+                $x = explode('.', $nama_file);
+                $ekstensi = strtolower(end($x));
+                $ukuran = $_FILES['profile']['size'];
+                $file_temp = $_FILES['profile']['tmp_name'];
+
+                if (in_array($ekstensi, $ekstensi_std) === true) {
+                    if ($ukuran < 2000000) {
+                        Image::compress($file_temp, 'img/' . $nama_file , 100);
+                        self::simpanGambar($nama_file, $file_lama, $upload_gambar);
+                    } else {
+                        Image::compress($file_temp, 'img/' . $nama_file , 50);
+                        self::simpanGambar($nama_file, $file_lama, $upload_gambar);
+                    }
                 } else {
-                    Image::compress($file_temp, 'img/' . $nama_file , 50);
-                    self::simpanGambar($nama_file, $file_lama, $upload_gambar);
+                    Flasher::setFlash('Gagal', 'diupdate', 'danger', 'profile', 'Ekstensi gambar tidak sesuai !!');
+                    header('Location: ' . BASEURL . '/profile');
+                    exit;
                 }
-            } else {
-                Flasher::setFlash('Gagal', 'diupdate', 'danger', 'profile', 'Ekstensi gambar tidak sesuai !!');
-                header('Location: ' . BASEURL . '/profile');
-                exit;
-            }
 
-        } else {
-            if ($this->model('User')->update($_POST, $file_lama) > 0) {
-                Flasher::setFlash('Berhasil', 'diupdate', 'success', 'profile', '');
-                header('Location: ' . BASEURL . '/profile');
-                exit;
             } else {
-                Flasher::setFlash('Gagal', 'diupdate', 'danger', 'profile', '');
-                header('Location: ' . BASEURL . '/profile');
-                exit;
+                if ($this->model('User')->update($_POST, $file_lama) > 0) {
+                    Flasher::setFlash('Berhasil', 'diupdate', 'success', 'profile', '');
+                    header('Location: ' . BASEURL . '/profile');
+                    exit;
+                } else {
+                    Flasher::setFlash('Gagal', 'diupdate', 'danger', 'profile', '');
+                    header('Location: ' . BASEURL . '/profile');
+                    exit;
+                }
             }
-        }
+		} else {
+			Flasher::setFlash($respon['message'], '', 'danger', '', '');
+			header ('Location: ' . BASEURL . '/profile' );
+			exit;
+		}
+
+
     }
 
     public function simpanGambar($nama_file, $file_lama, $upload_gambar):void

@@ -20,7 +20,7 @@ class Flasher
     {
         if ( isset($_SESSION['flash'])) {
             echo    '<div class="alert alert-'. $_SESSION['flash']['type'] .'" role="alert">
-                        Data '. $_SESSION['flash']['hasil'] .' <strong>'. $_SESSION['flash']['pesan'] .' </strong> '. $_SESSION['flash']['aksi'] .' '.$_SESSION['flash']['error'] .'
+                        '. $_SESSION['flash']['hasil'] .' <strong>'. $_SESSION['flash']['pesan'] .' </strong> '. $_SESSION['flash']['aksi'] .' '.$_SESSION['flash']['error'] .'
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>

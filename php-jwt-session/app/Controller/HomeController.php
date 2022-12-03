@@ -3,7 +3,6 @@
 namespace BasicPhpPzn\PhpJwtSession\Controller;
 
 use BasicPhpPzn\PhpJwtSession\App\Controller;
-
 class HomeController extends Controller
 {
     public function index()

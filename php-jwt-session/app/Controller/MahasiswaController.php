@@ -4,6 +4,7 @@ namespace BasicPhpPzn\PhpJwtSession\Controller;
 
 use BasicPhpPzn\PhpJwtSession\App\Controller;
 use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
+use BasicPhpPzn\PhpJwtSession\Services\Security;
 
 class MahasiswaController extends Controller
 {
@@ -38,16 +39,22 @@ class MahasiswaController extends Controller
 	public function tambah () 
 	{
 		$nim = $_POST['nim'];
-		var_dump($this->model('Mahasiswa')->cekMahasiswa($nim));
-		if($this->model('Mahasiswa')->cekMahasiswa($nim) > 0){
-			Flasher::setFlash('gagal', 'ditambahkan', 'danger','' ,'Nim sudah ada di database !');
-			header ('Location: ' . BASEURL . '/mahasiswa' );
-		} elseif( $this->model('Mahasiswa')->tambahDataMhs($_POST) > 0 ){
-			Flasher::setFlash('berhasil', 'ditambahkan', 'success','' , '');
-			header ('Location: ' . BASEURL . '/mahasiswa' );
-			exit;
+		$respon = Security::verifyToken($_POST);
+		if($respon['type']){
+			if($this->model('Mahasiswa')->cekMahasiswa($nim) > 0){
+				Flasher::setFlash('gagal', 'ditambahkan', 'danger','' ,'Nim sudah ada di database !');
+				header ('Location: ' . BASEURL . '/mahasiswa' );
+			} elseif( $this->model('Mahasiswa')->tambahDataMhs($_POST) > 0 ){
+				Flasher::setFlash('berhasil', 'ditambahkan', 'success','' , '');
+				header ('Location: ' . BASEURL . '/mahasiswa' );
+				exit;
+			} else {
+				Flasher::setFlash('gagal', 'ditambahkan', 'danger','' ,'');
+				header ('Location: ' . BASEURL . '/mahasiswa' );
+				exit;
+			}
 		} else {
-			Flasher::setFlash('gagal', 'ditambahkan', 'danger','' ,'');
+			Flasher::setFlash($respon['message'], '', 'danger', '', '');
 			header ('Location: ' . BASEURL . '/mahasiswa' );
 			exit;
 		}
@@ -56,15 +63,22 @@ class MahasiswaController extends Controller
 
 	public function hapus () 
 	{
-		if( $this->model('Mahasiswa')->hapusDataMhs($_POST) > 0 ){
-			Flasher::setFlash('berhasil', 'dihapus', 'success','', '');
-			header ('Location: ' . BASEURL . '/mahasiswa' );
-			exit;
+		$respon = Security::verifyToken($_POST);
+		if($respon['type']){
+			if( $this->model('Mahasiswa')->hapusDataMhs($_POST) > 0 ){
+				header ('Location: ' . BASEURL . '/mahasiswa' );
+				exit;
+			} else {
+				Flasher::setFlash('gagal', 'dihapus', 'danger', '', '');
+				header ('Location: ' . BASEURL . '/mahasiswa' );
+				exit;
+			}
 		} else {
-			Flasher::setFlash('gagal', 'dihapus', 'danger', '', '');
+			Flasher::setFlash($respon['message'], '', 'danger', '', '');
 			header ('Location: ' . BASEURL . '/mahasiswa' );
 			exit;
 		}
+
 	}
 
 
@@ -75,12 +89,19 @@ class MahasiswaController extends Controller
 
 	public function update () 
 	{
-		if( $this->model('Mahasiswa')->updateDataMhs($_POST) > 0 ){
-			Flasher::setFlash('berhasil', 'diubah', 'success', '', '');
-			header ('Location: ' . BASEURL . '/mahasiswa' );
-			exit;
+		$respon = Security::verifyToken($_POST);
+		if($respon['type']){
+			if( $this->model('Mahasiswa')->updateDataMhs($_POST) > 0 ){
+				Flasher::setFlash('berhasil', 'diubah', 'success', '', '');
+				header ('Location: ' . BASEURL . '/mahasiswa' );
+				exit;
+			} else {
+				Flasher::setFlash('gagal', 'diubah', 'danger', '', '');
+				header ('Location: ' . BASEURL . '/mahasiswa' );
+				exit;
+			}
 		} else {
-			Flasher::setFlash('gagal', 'diubah', 'danger', '', '');
+			Flasher::setFlash($respon['message'], '', 'danger', '', '');
 			header ('Location: ' . BASEURL . '/mahasiswa' );
 			exit;
 		}

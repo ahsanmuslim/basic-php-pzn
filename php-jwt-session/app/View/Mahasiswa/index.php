@@ -1,6 +1,9 @@
 <?php
 
 use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
+use BasicPhpPzn\PhpJwtSession\Services\Security;
+
+$csrftoken = Security::csrfToken();
 
 ?>
 <div class="container mt-3">
@@ -41,8 +44,9 @@ use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
 						<a href="" class="btn btn-success btn-sm float-right ml-1 tampilModalEdit" data-toggle="modal" data-target="#modalMhs" data-nim="<?= $mhs['nim']; ?>">edit</a>
 						<form action="<?= BASEURL ?>/mahasiswa" method="POST" class="d-inline">
 							<input type="hidden" value="DELETE" name="_method">
+							<input type="hidden" value="<?= $csrftoken ?>" name="csrftoken">
 							<input type="hidden" value="<?= $mhs['nim']; ?>" name="nim">
-							<input type="submit" value="delete" class="btn btn-danger btn-sm float-right ml-1 tombol-hapus" value="hapus" name="hapus">
+							<input type="submit" value="delete" class="btn btn-danger btn-sm float-right ml-1 tombol-hapus-form" value="hapus" name="hapus">
 						</form>
 					</li>
 				<?php endforeach; ?>
@@ -65,6 +69,7 @@ use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
 			<div class="modal-body">
 				<form action="<?= BASEURL ?>/mahasiswa" method="post">
 				<input type="hidden" value="PUT" name="_method">
+				<input type="hidden" value="<?= $csrftoken ?>" name="csrftoken">
 				<div class="form-group">
 					<label for="nim">NIM</label>
 					<input type="text"  name="nim" class="form-control" id="nim" required>

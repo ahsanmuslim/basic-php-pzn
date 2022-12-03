@@ -7,7 +7,7 @@ $(function() {
         // console.log('Tambah');
         $('#judulModal').html('Tambah Data Mahasiswa');
         $('.modal-footer button[type=submit]').html('Tambah Data');
-        $('.modal-body input[type=hidden]').attr('value', 'POST');
+        $('.modal-body input[name=_method]').attr('value', 'POST');
         $('.modal-body input[name=nim]').attr('readonly', false);
 
         //baris ini berfungsi untuk menghilangkan data yang ada di modal karena fungsi ajax getUbah masih tersimpan
@@ -25,7 +25,7 @@ $(function() {
 
         $('#judulModal').html('Edit Data Mahasiswa');
         $('.modal-footer button[type=submit]').html('Edit Data');
-        $('.modal-body input[type=hidden]').attr('value', 'PUT');
+        $('.modal-body input[name=_method]').attr('value', 'PUT');
         $('.modal-body input[name=nim]').attr('readonly', true);
         $('.modal-body form').attr('action,' + url + 'mahasiswa');
 
@@ -90,7 +90,7 @@ $(function() {
     });
 
     //fungsi konfirmasi hapus unutk methods anchor link
-    $('.tombol-hapus').on('click', function (e) {
+    $('.tombol-hapus-link').on('click', function (e) {
 
         e.preventDefault();
         const href = $(this).attr('href');
@@ -110,6 +110,36 @@ $(function() {
         })
 
     });
+
+    //fungsi konfirmasi hapus without Jquery
+const tombolHapus = document.querySelectorAll('.tombol-hapus-form');
+
+tombolHapus.forEach(tbl => {
+    tbl.addEventListener('click', function(e) {
+        var form =  this.closest("form");
+
+        e.preventDefault();
+        Swal.fire({
+            title: 'Apakah Anda Yakin ?',
+            text: "Data yang Anda hapus tidak dapat di Recovery !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Saya yakin !'
+        }).then((willDelete) => {
+            if (willDelete.value) {
+                form.submit();
+                Swal.fire(
+                    'Deleted!',
+                    'Your data has been deleted.',
+                    'success'
+                )
+            }
+        });
+    });
+});
+
 
 
 

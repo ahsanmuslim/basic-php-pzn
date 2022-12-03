@@ -27,7 +27,7 @@ class Session extends Controller
 
             //panggil Env Session Lifetime
             $app = App();
-            var_dump($app);
+
             //generate JWT, set cookie option dan simpan JWT di Cookie
             $jwt = JWT::encode($payload, self::$SECRET_KEY, 'HS256');
             $option = [
@@ -55,6 +55,7 @@ class Session extends Controller
             $controller = new Controller();
 
             $userlogin = $controller->model("User")->getUser();
+
             $jwt = $_COOKIE['PHP-MVC-PZN'];
 
             //cek apakah JWT user login pada Cookie sama dengan JWT active user yang tersimpan di DB

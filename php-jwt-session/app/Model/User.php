@@ -12,7 +12,7 @@ class User
         $this->db = new Database();
     }
 
-    public function getUser(): array
+    public function getUser()
     {
         $email = $_SESSION['email'];
         $query = "SELECT * FROM " .$this->table. " WHERE email =:email";
@@ -21,7 +21,7 @@ class User
         return $this->db->single();
     }
 
-    public function cekUserLogin(string $email, string $password): array
+    public function cekUserLogin(string $email, string $password)
     {
         $cekdata = "SELECT * FROM ".$this->table." WHERE email =:email AND password =:password ";
         $this->db->query($cekdata);
