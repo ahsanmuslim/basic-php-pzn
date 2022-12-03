@@ -5,24 +5,19 @@ require_once __DIR__ . '/../Config/config.php';
 
 use PDO;
 use PDOException;
-use const BasicPhpPzn\PhpJwtSession\Config\{DB_HOST, DB_USER, DB_PASS, DB_NAME};
-
+use function BasicPhpPzn\PhpJwtSession\Config\Conn;
 
 class Database 
 {
-    private $host = DB_HOST;
-    private $user = DB_USER;
-    private $pass = DB_PASS;
-    private $db_name = DB_NAME;
-
     //database handler & statement
     private $dbh;
     private $stmt;
 
     public function __construct()
     {
+		$koneksi = Conn();
         //data source name
-        $dsn = 'mysql:host='. $this->host . ';dbname=' . $this->db_name;
+        $dsn = 'mysql:host='. $koneksi['host'] . ';dbname=' . $koneksi['name'];
 
 		//variable option untuk optimasi koneksi ke database 
 		$option = [
@@ -32,7 +27,7 @@ class Database
 
         //membuat object PDO
 		try {
-			$this->dbh = new PDO ($dsn, $this->user , $this->pass , $option );
+			$this->dbh = new PDO ($dsn, $koneksi['user'] , $koneksi['pass'] , $option );
 		} catch (PDOException $e) {
 			die ($e->getMessage());
 		}

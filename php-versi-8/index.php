@@ -9,7 +9,7 @@ echo '<br>';
 // require_once __DIR__ . '/app/php80/PropertyPromotion.php';
 // require_once __DIR__ . '/app/php80/UnionType.php';
 // require_once __DIR__ . '/app/php80/MatchExpression.php';
-// require_once __DIR__ . '/app/php80/NullSafe.php';
+require_once __DIR__ . '/app/php80/NullSafe.php';
 // require_once __DIR__ . '/app/php80/ValidationFunction.php';
 // require_once __DIR__ . '/app/php80/MixedType.php';
 // require_once __DIR__ . '/app/php80/CommaParameter.php';
@@ -17,7 +17,7 @@ echo '<br>';
 // require_once __DIR__ . '/app/php80/ThrowExpression.php';
 // require_once __DIR__ . '/app/php80/ClassOnObject.php';
 // require_once __DIR__ . '/app/php80/StringableInterface.php';
-require_once __DIR__ . '/app/php80/NewStringFunction.php';
+// require_once __DIR__ . '/app/php80/NewStringFunction.php';
 
 
 // echo "PHP Versi 8.1";

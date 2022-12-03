@@ -6,6 +6,7 @@ use BasicPhpPzn\PhpJwtSession\Controller\HomeController;
 use BasicPhpPzn\PhpJwtSession\Middleware\AuthMiddleware;
 use BasicPhpPzn\PhpJwtSession\Controller\AboutController;
 use BasicPhpPzn\PhpJwtSession\Controller\LoginController;
+use BasicPhpPzn\PhpJwtSession\Controller\ProfileController;
 use BasicPhpPzn\PhpJwtSession\Controller\MahasiswaController;
 
 //Router untuk Home
@@ -23,6 +24,12 @@ Router::add('DELETE', '/mahasiswa', MahasiswaController::class, 'hapus', [AuthMi
 
 //Route untuk About
 Router::add('GET', '/about', AboutController::class, 'index', [AuthMiddleware::class]);
+
+//Route untuk Profile
+Router::add('GET', '/profile', ProfileController::class, 'index', [AuthMiddleware::class]);
+Router::add('GET', '/profile/macaddress', ProfileController::class, 'macaddress', [AuthMiddleware::class]);
+Router::add('GET', '/profile/edit', ProfileController::class, 'edit', [AuthMiddleware::class]);
+Router::add('PUT', '/profile', ProfileController::class, 'update', [AuthMiddleware::class]);
 
 //Route untuk proses login
 Router::add('POST', '/login', LoginController::class, 'login');

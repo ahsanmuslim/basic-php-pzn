@@ -2,8 +2,6 @@
 
 use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
 
-use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
-
 ?>
 <div class="container mt-3">
 
@@ -44,7 +42,7 @@ use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
 						<form action="<?= BASEURL ?>/mahasiswa" method="POST" class="d-inline">
 							<input type="hidden" value="DELETE" name="_method">
 							<input type="hidden" value="<?= $mhs['nim']; ?>" name="nim">
-							<input type="submit" value="delete" class="btn btn-danger btn-sm float-right ml-1" onClick="return confirm('Apakah Anda yakin akan menghapus data ini ?');" value="hapus" name="hapus">
+							<input type="submit" value="delete" class="btn btn-danger btn-sm float-right ml-1 tombol-hapus" value="hapus" name="hapus">
 						</form>
 					</li>
 				<?php endforeach; ?>

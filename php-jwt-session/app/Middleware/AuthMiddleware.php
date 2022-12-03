@@ -7,7 +7,6 @@ require_once __DIR__ . '/../Config/config.php';
 use BasicPhpPzn\PhpJwtSession\Helper\Access;
 use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
 use BasicPhpPzn\PhpJwtSession\Helper\Session;
-use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
 
 class AuthMiddleware implements Middleware
 {

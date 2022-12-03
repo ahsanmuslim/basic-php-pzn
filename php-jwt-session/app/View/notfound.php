@@ -1,6 +1,3 @@
-<?php
-use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
-?>
 <!DOCTYPE html>
 <html>
 <head>

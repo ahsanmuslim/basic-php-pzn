@@ -53,4 +53,25 @@ class User
         $this->db->execute();
     }
 
+    public function update($data, $nama_file)
+    {
+        $query = "UPDATE " . $this->table . " SET 
+                    nama_user =:namauser,
+                    email =:email,
+                    no_telp =:no_telp,
+                    profile =:profile
+                    WHERE id_user =:id_user";
+
+        $this->db->query($query);
+
+        $this->db->bind('id_user', $data['id_user']);
+        $this->db->bind('email', $data['email']);
+        $this->db->bind('namauser', $data['namauser']);
+        $this->db->bind('no_telp', $data['no_telp']);
+        $this->db->bind('profile', $nama_file);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }

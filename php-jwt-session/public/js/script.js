@@ -72,6 +72,45 @@ $(function() {
         });
     });
 
+    //fungsi untuk menampilka nama file ynag di upload
+    $('.custom-file-input').on('change', function () {
+
+        var size =(this.files[0].size);
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').addClass("selected").html(fileName);
+
+        if(size > 2000000) {
+            //menampilkan sweet alert jika file terlalu besar
+            Swal.fire({
+                icon: 'info',
+                title: 'Warning',
+                text: 'File yang Anda upload lebih dari 2Mb !!',
+            })
+        } 
+    });
+
+    //fungsi konfirmasi hapus unutk methods anchor link
+    $('.tombol-hapus').on('click', function (e) {
+
+        e.preventDefault();
+        const href = $(this).attr('href');
+
+        Swal.fire({
+            title: 'Apakah Anda Yakin ?',
+            text: "Data yang Anda hapus tidak dapat di Recovery !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Saya yakin !'
+        }).then((result) => {
+            if(result.value){
+                document.location.href = href;
+            }       
+        })
+
+    });
+
 
 
 });

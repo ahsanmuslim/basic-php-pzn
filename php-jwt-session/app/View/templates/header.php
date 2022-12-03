@@ -1,7 +1,5 @@
 <?php
-
 use BasicPhpPzn\PhpJwtSession\Helper\Access;
-use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
 
 $akses = new Access();
 ?>
@@ -11,6 +9,8 @@ $akses = new Access();
 	<title>Halaman <?= $data['title'] ?></title>
 	<link rel="stylesheet" type="text/css" href="<?= BASEURL ?>/css/bootstrap.css">
 	<link rel="shortcut icon" href="<?= BASEURL ?>/img/icon.png" type="image/x-icon">
+	<link href="<?= BASEURL; ?>/vendor/fortawesome/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="<?= BASEURL; ?>/css/font-google.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -42,12 +42,13 @@ $akses = new Access();
 			</div>
 
 			<div class="navbar-nav">
-				<img class="mr-2 rounded-circle" src="<?= BASEURL ?>/img/Susanto.jpg" width="40" height="40" alt="avatar">
+				<img class="mr-2 rounded-circle" src="<?= BASEURL ?>/img/<?= $data['userlogin']['profile']; ?>" width="40" height="40" alt="avatar">
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<?= $data['userlogin']['nama_user'] ?>
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="<?= BASEURL ?>/profile">My Profile</a>
 						<a class="dropdown-item" href="<?= BASEURL ?>/logout">Logout</a>
 					</div>
 				</li>

@@ -21,7 +21,11 @@ function getCountry(?User $user): ?string
 // var_dump(getCountry(null));
 $address = new Address();
 $address->country = "India";
+
 $user = new User();
+$user->address = $address;
+
+$user->address->country = "Indonesia";
 
 var_dump($address);
 var_dump($user);

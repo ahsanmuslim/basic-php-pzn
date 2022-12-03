@@ -2,12 +2,10 @@
 
 namespace BasicPhpPzn\PhpJwtSession\Helper;
 
-use Exception;
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 use Ramsey\Uuid\Uuid;
-
 use BasicPhpPzn\PhpJwtSession\App\Controller;
+use function BasicPhpPzn\PhpJwtSession\Config\App;
 
 class Session extends Controller
 {
@@ -27,10 +25,13 @@ class Session extends Controller
                 "id_login" => Uuid::uuid1()->toString()
             ];
 
+            //panggil Env Session Lifetime
+            $app = App();
+            var_dump($app);
             //generate JWT, set cookie option dan simpan JWT di Cookie
             $jwt = JWT::encode($payload, self::$SECRET_KEY, 'HS256');
             $option = [
-                "expires" => time()+3600, // cookie expire 1 jam
+                "expires" => time()+ $app['lifetime'], // cookie expire 1 jam
                 "httponly" => true,
                 "secure" => false,
                 "path" => "",

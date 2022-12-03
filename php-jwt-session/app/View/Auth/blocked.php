@@ -1,5 +1,4 @@
 <?php
-use const BasicPhpPzn\PhpJwtSession\Config\BASEURL;
 use BasicPhpPzn\PhpJwtSession\Helper\Access;
 
 $akses = new Access();

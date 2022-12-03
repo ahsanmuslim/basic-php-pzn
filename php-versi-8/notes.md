@@ -16,7 +16,6 @@ Fitur Baru PHP 8.0 :
 15. Class On Object
 16. Stringable Interface
 17. New String Function
-18. 
 
 Fitur Baru PHP 8.1 :
 1. Enum
