@@ -9,7 +9,7 @@ $akses = new Access();
 	<title>Halaman <?= $data['title'] ?></title>
 	<link rel="stylesheet" type="text/css" href="<?= BASEURL ?>/css/bootstrap.css">
 	<link rel="shortcut icon" href="<?= BASEURL ?>/img/icon.png" type="image/x-icon">
-	<link href="<?= BASEURL; ?>/vendor/fortawesome/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href="<?= BASEURL ?>/vendor/fortawesome/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
 	<link href="<?= BASEURL; ?>/css/font-google.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>

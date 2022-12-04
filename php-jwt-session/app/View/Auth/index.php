@@ -31,7 +31,7 @@ use BasicPhpPzn\PhpJwtSession\Helper\Flasher;
 							<form action="<?= BASEURL ?>/login" method="POST" class="my-login-validation" novalidate="">
 								<div class="form-group">
 									<label for="email">Email</label>
-									<input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+									<input id="email" type="text" class="form-control" name="email" value="" required autofocus>
 									<div class="invalid-feedback">
 										Email is invalid
 									</div>
