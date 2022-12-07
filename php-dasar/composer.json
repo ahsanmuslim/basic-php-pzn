@@ -1,0 +1,19 @@
+{
+    "name": "ahsan/php-dasar",
+    "description": "Belajar Dasar PHP",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Ahsan\\PhpDasar\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ahmad Susanto",
+            "email": "ahmadsusanto912@gmail.com"
+        }
+    ],
+    "require": {
+        "php" : ">=8"
+    }
+}
